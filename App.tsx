@@ -16,6 +16,12 @@ const App = () => {
     ]);
   };
 
+  const handleDeleteGoal = (id: string) => {
+    setCourseGoals((currentGoals) => {
+      return currentGoals.filter((goal) => goal.id !== id);
+    });
+  };
+
   return (
     <View style={styles.appContainer}>
       <GoalInput {...{ handleAddGoal }} />
@@ -23,7 +29,9 @@ const App = () => {
         <FlatList
           data={courseGoals}
           alwaysBounceVertical={false}
-          renderItem={({ item }) => <GoalItem item={item} />}
+          renderItem={({ item }) => (
+            <GoalItem {...{ item, handleDeleteGoal }} />
+          )}
           keyExtractor={(item, index) => item.id + index}
         />
       </View>
