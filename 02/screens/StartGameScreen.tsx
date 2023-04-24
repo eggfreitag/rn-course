@@ -2,14 +2,12 @@ import { useAtom } from "jotai";
 import { View, TextInput, StyleSheet, Alert } from "react-native";
 
 import Colors from "../constants/colors";
-import PrimaryButton from "../components/PrimaryButton";
+import PrimaryButton from "../components/ui/PrimaryButton";
 import { enteredNumberAtom } from "../atoms/enteredNumber";
+import { userNumberAtom } from "../atoms/userNumber";
 
-type StartGameScreenProps = {
-  handlePickedNumber: (pickedNumber: number) => void;
-};
-
-const StartGameScreen = ({ handlePickedNumber }: StartGameScreenProps) => {
+const StartGameScreen = () => {
+  const [userNumber, setUserNumber] = useAtom(userNumberAtom);
   const [enteredNumber, setEnteredNumber] = useAtom(enteredNumberAtom);
 
   const handleInputChange = (inputText: string) => {
@@ -18,7 +16,6 @@ const StartGameScreen = ({ handlePickedNumber }: StartGameScreenProps) => {
 
   const handleConfirm = () => {
     const number = parseInt(enteredNumber);
-
     if (isNaN(number) || number <= 0 || number > 99) {
       return Alert.alert(
         "Invalid number!",
@@ -27,9 +24,9 @@ const StartGameScreen = ({ handlePickedNumber }: StartGameScreenProps) => {
       );
     }
 
-    return handlePickedNumber(number);
+    return setUserNumber(number);
   };
-
+  console.log(userNumber, "--------0=========0000909080");
   const handleReset = () => {
     setEnteredNumber("");
   };
@@ -65,7 +62,7 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: Colors.primary800,
     elevation: 4,
-    shadowColor: "#000",
+    shadowColor: "black",
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
     shadowOpacity: 0.25,
