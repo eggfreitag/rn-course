@@ -5,12 +5,12 @@ import * as SplashScreen from "expo-splash-screen";
 import { LinearGradient } from "expo-linear-gradient";
 import { ImageBackground, SafeAreaView, StyleSheet } from "react-native";
 
-import Colors from "./constants/colors";
-import GameScreen from "./screens/GameScreen";
-import { userNumberAtom } from "./atoms/userNumber";
-import { gameIsOverAtom } from "./atoms/gameIsOver";
-import GameOverScreen from "./screens/GameOverScreen";
-import StartGameScreen from "./screens/StartGameScreen";
+import Colors from "constants/colors";
+import GameScreen from "screens/GameScreen";
+import { userNumberAtom } from "atoms/userNumber";
+import { gameIsOverAtom } from "atoms/gameIsOver";
+import GameOverScreen from "screens/GameOverScreen";
+import StartGameScreen from "screens/StartGameScreen";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -19,8 +19,8 @@ const AppInner = () => {
   const [gameIsOver] = useAtom(gameIsOverAtom);
 
   const [fontsLoaded] = Font.useFonts({
-    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
-    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+    "open-sans": require("assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("assets/fonts/OpenSans-Bold.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
@@ -50,7 +50,7 @@ const AppInner = () => {
       onLayout={onLayoutRootView}
     >
       <ImageBackground
-        source={require("./assets/images/background.png")}
+        source={require("assets/images/background.png")}
         resizeMode="cover"
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}

@@ -1,14 +1,14 @@
 import { useAtom } from "jotai";
 import { View, TextInput, StyleSheet, Alert, Text } from "react-native";
 
-import Colors from "../constants/colors";
-import Card from "../components/ui/Card";
-import Title from "../components/ui/Title";
-import { userNumberAtom } from "../atoms/userNumber";
-import { gameIsOverAtom } from "../atoms/gameIsOver";
-import PrimaryButton from "../components/ui/PrimaryButton";
-import { enteredNumberAtom } from "../atoms/enteredNumber";
-import InstructionText from "../components/ui/InstructionText";
+import Colors from "constants/colors";
+import Card from "components/ui/Card";
+import Title from "components/ui/Title";
+import { userNumberAtom } from "atoms/userNumber";
+import { gameIsOverAtom } from "atoms/gameIsOver";
+import PrimaryButton from "components/ui/PrimaryButton";
+import { enteredNumberAtom } from "atoms/enteredNumber";
+import InstructionText from "components/ui/InstructionText";
 
 const StartGameScreen = () => {
   const [, setUserNumber] = useAtom(userNumberAtom);

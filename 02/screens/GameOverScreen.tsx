@@ -1,13 +1,13 @@
 import { useAtom } from "jotai";
 import { Image, StyleSheet, Text, View } from "react-native";
 
-import Colors from "../constants/colors";
-import Title from "../components/ui/Title";
-import { userNumberAtom } from "../atoms/userNumber";
-import { gameIsOverAtom } from "../atoms/gameIsOver";
-import PrimaryButton from "../components/ui/PrimaryButton";
-import { enteredNumberAtom } from "../atoms/enteredNumber";
-import { guessedNumbersAtom } from "../atoms/guessedNumbers";
+import Colors from "constants/colors";
+import Title from "components/ui/Title";
+import { userNumberAtom } from "atoms/userNumber";
+import { gameIsOverAtom } from "atoms/gameIsOver";
+import PrimaryButton from "components/ui/PrimaryButton";
+import { enteredNumberAtom } from "atoms/enteredNumber";
+import { guessedNumbersAtom } from "atoms/guessedNumbers";
 
 const GameOverScreen = () => {
   const [userNumber, setUserNumber] = useAtom(userNumberAtom);
@@ -27,7 +27,7 @@ const GameOverScreen = () => {
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
-          source={require("../assets/images/success.png")}
+          source={require("assets/images/success.png")}
         />
       </View>
       <Text style={styles.summaryText}>

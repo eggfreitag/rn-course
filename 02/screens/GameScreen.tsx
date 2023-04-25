@@ -3,16 +3,16 @@ import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useMemo, useState } from "react";
 import { View, StyleSheet, Alert, FlatList } from "react-native";
 
-import Card from "../components/ui/Card";
-import Title from "../components/ui/Title";
-import LogItem from "../components/game/LogItem";
-import { userNumberAtom } from "../atoms/userNumber";
-import { gameIsOverAtom } from "../atoms/gameIsOver";
-import PrimaryButton from "../components/ui/PrimaryButton";
-import { guessedNumbersAtom } from "../atoms/guessedNumbers";
-import InstructionText from "../components/ui/InstructionText";
-import generateRandomNumber from "../utils/generateRandomNumber";
-import NumberContainer from "../components/game/NumberContainer";
+import Card from "components/ui/Card";
+import Title from "components/ui/Title";
+import LogItem from "components/game/LogItem";
+import { userNumberAtom } from "atoms/userNumber";
+import { gameIsOverAtom } from "atoms/gameIsOver";
+import PrimaryButton from "components/ui/PrimaryButton";
+import { guessedNumbersAtom } from "atoms/guessedNumbers";
+import InstructionText from "components/ui/InstructionText";
+import generateRandomNumber from "utils/generateRandomNumber";
+import NumberContainer from "components/game/NumberContainer";
 
 let minBoundary = 1;
 let maxBoundary = 100;
@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 24,
+    alignItems: "center",
   },
   instructionText: { marginBottom: 12 },
   buttonsContainer: {
