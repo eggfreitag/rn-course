@@ -1,11 +1,17 @@
+import { ReactNode } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 
 import Colors from "../../constants/colors";
 
+type PrimaryButtonProps = {
+  title?: ReactNode;
+  onPress?: () => void;
+};
+
 const PrimaryButton = ({
   title = "Primary Button",
   onPress = () => console.log("Pressed"),
-}) => {
+}: PrimaryButtonProps) => {
   return (
     <View style={styles.buttonOuterContainer}>
       <Pressable
