@@ -1,7 +1,13 @@
 import { useAtom } from "jotai";
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useMemo, useState } from "react";
-import { View, StyleSheet, Alert, FlatList } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Alert,
+  FlatList,
+  useWindowDimensions,
+} from "react-native";
 
 import Card from "components/ui/Card";
 import Title from "components/ui/Title";
@@ -21,6 +27,7 @@ const GameScreen = () => {
   const [userNumber] = useAtom(userNumberAtom);
   const [, setGameIsOver] = useAtom(gameIsOverAtom);
   const [guessedNumbers, setGuessedNumbers] = useAtom(guessedNumbersAtom);
+  const { width, height } = useWindowDimensions();
 
   const initialGuess = useMemo(
     () => generateRandomNumber(1, 100, userNumber!),
@@ -69,9 +76,8 @@ const GameScreen = () => {
 
   const guessedNumbersListLength = guessedNumbers.length;
 
-  return (
-    <View style={styles.screen}>
-      <Title>Opponent's Guess</Title>
+  let content = (
+    <>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
         <InstructionText style={styles.instructionText}>
@@ -92,6 +98,35 @@ const GameScreen = () => {
           </View>
         </View>
       </Card>
+    </>
+  );
+
+  if (width > 500) {
+    content = (
+      <>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton
+              title={<Ionicons name="md-remove" size={24} color="white" />}
+              onPress={() => handleNextGuess("lower")}
+            />
+          </View>
+          <NumberContainer>{currentGuess}</NumberContainer>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton
+              title={<Ionicons name="md-add" size={24} color="white" />}
+              onPress={() => handleNextGuess("greater")}
+            />
+          </View>
+        </View>
+      </>
+    );
+  }
+
+  return (
+    <View style={styles.screen}>
+      <Title>Opponent's Guess</Title>
+      {content}
       <View style={styles.listContainer}>
         <FlatList
           data={guessedNumbers}

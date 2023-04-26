@@ -1,5 +1,13 @@
 import { useAtom } from "jotai";
-import { View, TextInput, StyleSheet, Alert, Text } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Alert,
+  useWindowDimensions,
+  KeyboardAvoidingView,
+  ScrollView,
+} from "react-native";
 
 import Colors from "constants/colors";
 import Card from "components/ui/Card";
@@ -13,6 +21,7 @@ import InstructionText from "components/ui/InstructionText";
 const StartGameScreen = () => {
   const [, setUserNumber] = useAtom(userNumberAtom);
   const [, setGameIsOver] = useAtom(gameIsOverAtom);
+  const { height } = useWindowDimensions(); // 기기가 회전할 경우 반응한다 (=동적 Dimensions)
 
   const [enteredNumber, setEnteredNumber] = useAtom(enteredNumberAtom);
 
@@ -39,38 +48,43 @@ const StartGameScreen = () => {
     setEnteredNumber("");
   };
 
+  const marginTop = height < 380 ? 30 : 100;
+
   return (
-    <View style={styles.rootContainer}>
-      <Title>Guess My Number</Title>
-      <Card>
-        <InstructionText>Enter a number</InstructionText>
-        <TextInput
-          style={styles.numberInput}
-          maxLength={2}
-          keyboardType="number-pad"
-          value={enteredNumber}
-          onChangeText={handleInputChange}
-        />
-        <View style={styles.buttonsContainer}>
-          <View style={styles.buttonContainer}>
-            <PrimaryButton title="Reset" onPress={handleReset} />
-          </View>
-          <View style={styles.buttonContainer}>
-            <PrimaryButton title="Confirm" onPress={handleConfirm} />
-          </View>
+    <ScrollView style={styles.screen}>
+      <KeyboardAvoidingView style={styles.screen} behavior="position">
+        <View style={[styles.rootContainer, { marginTop }]}>
+          <Title>Guess My Number</Title>
+          <Card>
+            <InstructionText>Enter a number</InstructionText>
+            <TextInput
+              style={styles.numberInput}
+              maxLength={2}
+              keyboardType="number-pad"
+              value={enteredNumber}
+              onChangeText={handleInputChange}
+            />
+            <View style={styles.buttonsContainer}>
+              <View style={styles.buttonContainer}>
+                <PrimaryButton title="Reset" onPress={handleReset} />
+              </View>
+              <View style={styles.buttonContainer}>
+                <PrimaryButton title="Confirm" onPress={handleConfirm} />
+              </View>
+            </View>
+          </Card>
         </View>
-      </Card>
-    </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  screen: { flex: 1 },
   rootContainer: {
     flex: 1,
-    marginTop: 100,
     alignItems: "center",
   },
-
   numberInput: {
     height: 50,
     width: 50,
